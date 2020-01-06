@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+
+>
+
+
+    <bean id="man" class="com.lanou.bean.Man" scope="prototype">
+        <property name="age" value="26"/>
+        <property name="food" ref="apple"/>
+        <property name="hobby" value="吃饭，睡觉"/>
+        <property name="gender" value="女"/>
+        <property name="name" value="孙尚香"/>
+    </bean>
+
+    <bean id="apple" class="com.lanou.bean.Food">
+        <property name="name" value="苹果"/>
+    </bean>
+
+    <!-- 使用实例化工厂方法 创建bean对象-->
+    <bean id="womenFactory" class="com.lanou.factory.WomenFactory"/>
+    <bean id="zhangsan" name="张三" factory-bean="womenFactory" factory-method="newInstance">
+        <constructor-arg name="name" value="赵云"></constructor-arg>
+    </bean>
+
+    <!--使用静态工厂方法创建bean对象 -->
+    <bean id="womenStaticFactory" name="zhao" class="com.lanou.factory.WomenStaticFactory" factory-method="newInstance">
+        <constructor-arg name="name" value="赵子龙"></constructor-arg>
+    </bean>
+
+
+    <bean id="caiwenji" class="com.lanou.bean.Man">
+        <property name="name" value="蔡文姬"/>
+    </bean>
+
+
+    <bean id="kai" class="com.lanou.bean.Man" init-method="init" destroy-method="destroy" lazy-init="true">
+        <property name="name" value="恺"/>
+    </bean>
+
+
+</beans>
